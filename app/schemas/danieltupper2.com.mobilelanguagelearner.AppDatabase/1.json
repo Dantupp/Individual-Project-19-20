@@ -1,0 +1,111 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "ce7a62325cf1ac731a5ee5db85e21d8a",
+    "entities": [
+      {
+        "tableName": "Location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER NOT NULL, `Lat` REAL NOT NULL, `Lng` REAL NOT NULL, PRIMARY KEY(`ID`))",
+        "fields": [
+          {
+            "fieldPath": "ID",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Lat",
+            "columnName": "Lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Lng",
+            "columnName": "Lng",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Marker",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`LocationID` INTEGER NOT NULL, `PlaceName` TEXT NOT NULL, PRIMARY KEY(`LocationID`))",
+        "fields": [
+          {
+            "fieldPath": "LocationID",
+            "columnName": "LocationID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "PlaceName",
+            "columnName": "PlaceName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "LocationID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Vocab",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`LocationID` INTEGER NOT NULL, `English` TEXT NOT NULL, `Hungarian` TEXT NOT NULL, `Difficulty` INTEGER NOT NULL, PRIMARY KEY(`LocationID`, `English`))",
+        "fields": [
+          {
+            "fieldPath": "LocationID",
+            "columnName": "LocationID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "English",
+            "columnName": "English",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Hungarian",
+            "columnName": "Hungarian",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Difficulty",
+            "columnName": "Difficulty",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "LocationID",
+            "English"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ce7a62325cf1ac731a5ee5db85e21d8a')"
+    ]
+  }
+}
